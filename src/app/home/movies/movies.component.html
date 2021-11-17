@@ -1,0 +1,20 @@
+<section class="section" *ngFor="let movieSection of allMoviesSections">
+  <h1 class="genre-name">{{ movieSection.genre }}</h1>
+
+  <div class="movies" (fetchGenres)="fetchData()">
+    <div class="movie" *ngFor="let movie of movieSection.movies">
+      <img
+        src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"
+        alt="{{ movie.title }}"
+      />
+
+      <div scrollR class="scroll scroll-right">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+
+      <div scrollLeft class="scroll scroll-left">
+        <i class="fas fa-chevron-left"></i>
+      </div>
+    </div>
+  </div>
+</section>

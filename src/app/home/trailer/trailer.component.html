@@ -1,0 +1,34 @@
+<div class="trailer-container">
+  <video
+    #trailer
+    [autoplay]="true"
+    id="trailer"
+    (ended)="trailerPlaying = false"
+    src="https://movietrailers.apple.com/movies/wb/dune/dune-final-trailer_h1080p.mov"
+    type="video/mp4"
+  ></video>
+
+  <div class="controls">
+    <button class="btn-play-pause" (click)="playOrStop(trailer)">
+      <div *ngIf="!trailerPlaying">
+        <i class="fas fa-play"></i>
+        <span>Play</span>
+      </div>
+
+      <div *ngIf="trailerPlaying">
+        <i class="fas fa-pause"></i>
+        <span>Pause</span>
+      </div>
+    </button>
+
+    <button class="btn-more-info">
+      <i class="fas fa-info-circle"></i>
+      <span>More Info</span>
+    </button>
+
+    <button class="btn-mute-volume-up" (click)="muteOrVolUp(trailer)">
+      <i *ngIf="!isMuted" class="fas fa-volume-up"></i>
+      <i *ngIf="isMuted" class="fas fa-volume-off"></i>
+    </button>
+  </div>
+</div>

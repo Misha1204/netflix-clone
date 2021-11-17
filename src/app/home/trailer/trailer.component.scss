@@ -1,0 +1,132 @@
+// TRAILER
+.trailer-container {
+  position: relative;
+}
+
+video {
+  width: 100vw;
+  height: 100%;
+}
+
+// CONTROLS
+.controls {
+  display: flex;
+  align-items: center;
+
+  position: absolute;
+  top: 75%;
+
+  width: 100%;
+  height: 10%;
+
+  white-space: nowrap;
+}
+
+button {
+  width: 10%;
+
+  margin-bottom: 5%;
+  padding: 0.8rem 0;
+  font-size: 1.2rem;
+
+  border: none;
+  border-radius: 3%;
+  outline: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-play-pause {
+  margin-left: 5%;
+  background-color: #fff;
+
+  span {
+    margin-left: 10%;
+  }
+}
+
+.btn-more-info {
+  margin-left: 1%;
+  color: white;
+  background-color: rgba($color: rgb(98, 92, 89), $alpha: 0.5);
+
+  span {
+    margin-left: 10%;
+  }
+}
+
+.btn-mute-volume-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 3vw;
+  height: 3vw;
+
+  margin-left: 62%;
+
+  color: #fff;
+  background-color: transparent;
+  border: solid 1px #fff;
+  border-radius: 50%;
+}
+
+// MEDIA QUERIES
+
+@media only screen and (max-width: 1200px) {
+  button {
+    width: 12%;
+
+    margin-bottom: 5%;
+    padding: 0.9rem 0;
+    font-size: 1rem;
+  }
+
+  .btn-mute-volume-up {
+    width: 3.5vw;
+    height: 3.5vw;
+
+    margin-left: 58%;
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  button {
+    width: 11%;
+
+    margin-bottom: 5%;
+    padding: 0.7rem 0;
+    font-size: 0.7rem;
+  }
+
+  .btn-mute-volume-up {
+    width: 3.5vw;
+    height: 3.5vw;
+
+    margin-left: 58%;
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  button {
+    width: 14%;
+
+    margin-bottom: 5%;
+    padding: 0.35rem 0;
+    font-size: 0.6rem;
+  }
+
+  .btn-more-info {
+    display: none;
+  }
+
+  .btn-mute-volume-up {
+    width: 4vw;
+    height: 4vw;
+
+    margin-left: 70%;
+    font-size: 0.6rem;
+  }
+}
