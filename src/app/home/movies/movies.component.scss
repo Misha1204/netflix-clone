@@ -1,12 +1,22 @@
 section {
-  margin: 0 1.6%;
+  margin: 1% 20px;
   color: #fff;
+  background-color: #000000;
+
+  h1 {
+    margin: 1.5% 0 0.5% 0;
+  }
+}
+
+// Movies
+
+.movies-container {
+  position: relative;
 }
 
 .movies {
   display: flex;
   align-items: center;
-  position: relative;
 
   width: 100%;
   height: fit-content;
@@ -20,8 +30,8 @@ section {
   cursor: pointer;
 
   img {
-    width: 300px;
-    height: 150px;
+    width: 25vw;
+    height: 20vh;
 
     border: none;
     border-radius: 2%;
@@ -30,11 +40,8 @@ section {
   }
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 // SCROLL BUTTONS
+
 .scroll {
   display: flex;
   justify-content: center;
@@ -63,6 +70,10 @@ section {
 
 .scroll-left {
   left: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 // .movies-main-container {
