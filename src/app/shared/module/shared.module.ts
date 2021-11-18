@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { FooterComponent } from '../components/footer/footer.component';
 import { HeaderComponent } from '../components/header/header.component';
+import { BlackHeaderDirective } from '../directives/blackHeader.directive';
 import { IntersectionObsDirective } from '../directives/intersectionObserver.directive';
 import { ScrollLDirective } from '../directives/scrollL.directive';
 import { ScrollRDirective } from '../directives/scrollR.directive';
@@ -15,6 +16,7 @@ import { ScrollRDirective } from '../directives/scrollR.directive';
     ScrollRDirective,
     ScrollLDirective,
     IntersectionObsDirective,
+    BlackHeaderDirective,
   ],
   exports: [
     CommonModule,
@@ -23,6 +25,7 @@ import { ScrollRDirective } from '../directives/scrollR.directive';
     ScrollRDirective,
     IntersectionObsDirective,
     ScrollLDirective,
+    BlackHeaderDirective,
   ],
 })
 export class SharedModule {}

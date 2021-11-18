@@ -1,5 +1,5 @@
 section {
-  margin: 1% 20px;
+  margin: 1% 0;
   color: #fff;
   background-color: #000000;
 
@@ -18,25 +18,32 @@ section {
   display: flex;
   align-items: center;
 
-  width: 100%;
   height: fit-content;
 
   overflow-x: scroll;
   overflow-y: hidden;
   scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
 }
 
 .movie {
   cursor: pointer;
+  scroll-snap-align: center;
 
   img {
-    width: 25vw;
+    width: 24.519vw;
     height: 20vh;
+
+    margin-left: 4px;
 
     border: none;
     border-radius: 2%;
     object-fit: cover;
     background-repeat: no-repeat;
+  }
+
+  &:nth-child(20) {
+    margin-right: 4px;
   }
 }
 

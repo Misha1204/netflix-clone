@@ -7,6 +7,6 @@ export class ScrollLDirective {
   @HostListener('click') scrollLeft() {
     const scrollWidth = this.elRef.nativeElement.parentElement.scrollWidth;
 
-    this.elRef.nativeElement.parentElement.scrollLeft -= scrollWidth / 5;
+    this.elRef.nativeElement.parentElement.scrollLeft -= scrollWidth / 6;
   }
 }
