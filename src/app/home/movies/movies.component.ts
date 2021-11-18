@@ -9,13 +9,14 @@ import { MoviesService } from './movies.service';
   styleUrls: ['./movies.component.scss'],
 })
 export class MoviesComponent implements OnInit, OnDestroy {
+  destroy$ = new Subject<any>();
   allMoviesSections: any = [];
-
-  destroy$ = new Subject();
 
   constructor(private moviesService: MoviesService) {}
 
   ngOnInit(): void {
+    // Get popular movies section on init
+
     this.moviesService
       .getPopularMovies()
       .pipe(takeUntil(this.destroy$))
@@ -28,7 +29,10 @@ export class MoviesComponent implements OnInit, OnDestroy {
   }
 
   fetchData() {
+    // Increase index value
     this.moviesService.index++;
+
+    // In case if index value is less than number of objects in objectsOfGenres
     if (this.moviesService.index < this.moviesService.objectsOfGenres.length) {
       this.moviesService
         .getMoviesByGenres()
@@ -39,10 +43,14 @@ export class MoviesComponent implements OnInit, OnDestroy {
             movies: res.movies,
           });
         });
+    } else {
+      // Display footer component
+      this.moviesService.endOfPage.next(true);
     }
   }
 
   ngOnDestroy() {
+    this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
 }

@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ResponseInterface } from 'src/app/shared/interfaces/response.interface';
 import { GenresInterface } from 'src/app/shared/interfaces/genres-array.interface';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MoviesService {
@@ -21,7 +22,9 @@ export class MoviesService {
     { genre: 'Music', id: 10402, movies: [] },
   ];
 
+  // Index of Genre
   index = 0;
+  endOfPage = new Subject<boolean>();
 
   constructor(private http: HttpClient) {}
 
