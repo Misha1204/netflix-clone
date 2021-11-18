@@ -1,51 +1,19 @@
-import {
-  AfterViewInit,
-  Directive,
-  ElementRef,
-  HostListener,
-  OnInit,
-} from '@angular/core';
+import { Directive, ElementRef, HostListener } from '@angular/core';
 
 @Directive({
   selector: '[blackHeader]',
 })
-export class BlackHeaderDirective implements AfterViewInit {
-  index = 2;
-
-  private _intersectionObserver?: IntersectionObserver;
-
+export class BlackHeaderDirective {
   constructor(private elRef: ElementRef) {}
 
-  ngAfterViewInit() {
-    this._intersectionObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            console.log(entry);
-            this.elRef.nativeElement.style.backgroundColor = 'black';
-            // observer.unobserve(<Element>this.elRef.nativeElement);
-          }
-        });
-      },
-      {
-        root: document.querySelector('section'),
-        threshold: 0.8,
-      }
-    );
+  @HostListener('window:scroll') scrollDown() {
+    console.log('Hi');
 
-    this._intersectionObserver.observe(<Element>this.elRef.nativeElement);
+    // CHANGE HEADER BACKGROUND COLOR
+    if (window.scrollY > 700) {
+      this.elRef.nativeElement.style.backgroundColor = 'black';
+    } else {
+      this.elRef.nativeElement.style.backgroundColor = 'transparent';
+    }
   }
-
-  // @HostListener('window:scroll') scrollDown() {
-  //   console.log('Hi');
-
-  //   // CHANGE HEADER BACKGROUND COLOR
-  //   if (window.scrollY > 500) {
-  //     console.log('Hi');
-
-  //     this.elRef.nativeElement.style.backgroundColor = 'black';
-  //   } else {
-  //     this.elRef.nativeElement.style.backgroundColor = 'transparent';
-  //   }
-  // }
 }
