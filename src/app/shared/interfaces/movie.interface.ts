@@ -6,6 +6,7 @@ export interface MovieInterface {
   release_date: string;
   title: string;
   vote_average: number;
+  overview: string;
   credits?: { cast: { name: string }[] };
   genres?: { id: number; name: string }[];
 }

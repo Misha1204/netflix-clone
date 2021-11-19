@@ -7,8 +7,6 @@ export class BlackHeaderDirective {
   constructor(private elRef: ElementRef) {}
 
   @HostListener('window:scroll') scrollDown() {
-    console.log('Hi');
-
     // CHANGE HEADER BACKGROUND COLOR
     if (window.scrollY > 700) {
       this.elRef.nativeElement.style.backgroundColor = 'black';

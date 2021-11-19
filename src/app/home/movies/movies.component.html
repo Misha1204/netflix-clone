@@ -3,8 +3,9 @@
 
   <div class="movies-container">
     <div class="movies" (fetchGenres)="fetchData()">
-      <div class="movie" *ngFor="let movie of movieSection.movies">
+      <div class="movie" *ngFor="let movie of movieSection.movies; index as i">
         <img
+          (click)="onMovieInfoClick(movie)"
           src="https://image.tmdb.org/t/p/original/{{ movie.poster_path }}"
           alt="{{ movie.title }}"
         />
@@ -20,3 +21,9 @@
     </div>
   </div>
 </section>
+
+<app-movie-info
+  *ngIf="showMovieInfo"
+  [clickedMovie]="clickedMovie"
+  (closeMovieInfo)="onMovieInfoClick()"
+></app-movie-info>

@@ -1,0 +1,13 @@
+<div class="movies-info-container">
+  <i class="far fa-times-circle" (click)="onCloseMovieInfo()"></i>
+  <img
+    src="https://image.tmdb.org/t/p/original/{{ clickedMovie.backdrop_path }}"
+    alt=""
+  />
+
+  <i class="fas fa-plus-circle"></i>
+
+  <h4 style="color: white">{{ clickedMovie.title }}</h4>
+  <p style="color: white; display: inline">{{ clickedMovie.overview }}</p>
+  <span style="color: white">{{ clickedMovie.vote_average }}</span>
+</div>

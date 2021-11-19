@@ -12,6 +12,10 @@ export class MoviesComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<any>();
   allMoviesSections: any = [];
 
+  // Movie Info
+  showMovieInfo = false;
+  clickedMovie!: any;
+
   constructor(private moviesService: MoviesService) {}
 
   ngOnInit(): void {
@@ -46,6 +50,17 @@ export class MoviesComponent implements OnInit, OnDestroy {
     } else {
       // Display footer component
       this.moviesService.endOfPage.next(true);
+    }
+  }
+
+  onMovieInfoClick(movie?: any) {
+    console.log(movie);
+
+    if (this.showMovieInfo === false) {
+      this.showMovieInfo = true;
+      this.clickedMovie = movie;
+    } else {
+      this.showMovieInfo = false;
     }
   }
 
