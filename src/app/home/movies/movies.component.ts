@@ -1,7 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MoviesService } from './movies.service';
+import { MovieState } from './store/movies.reducer';
+
+import * as MovieActions from './store/movies.actions';
 
 @Component({
   selector: 'app-movies',
@@ -16,20 +20,26 @@ export class MoviesComponent implements OnInit, OnDestroy {
   showMovieInfo = false;
   clickedMovie!: any;
 
-  constructor(private moviesService: MoviesService) {}
+  constructor(
+    private moviesService: MoviesService,
+    private store: Store<MovieState>
+  ) {
+    y;
+  }
 
   ngOnInit(): void {
     // Get popular movies section on init
 
-    this.moviesService
-      .getPopularMovies()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((popularMovies) => {
-        this.allMoviesSections.push({
-          genre: 'Popular Movies',
-          movies: popularMovies,
-        });
-      });
+    // this.moviesService
+    //   .getPopularMovies()
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((popularMovies) => {
+    //     this.allMoviesSections.push({
+    //       genre: 'Popular Movies',
+    //       movies: popularMovies,
+    //     });
+    //   });
+    this.store.dispatch(MovieActions.loadMovies());
   }
 
   fetchData() {
