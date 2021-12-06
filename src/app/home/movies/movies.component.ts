@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import {Observable, Subject} from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MoviesService } from './movies.service';
-import {moviesSelector, MovieState} from './store/movies.reducer';
+import {moviesSelector, MovieState, selectedMovieSelector} from './store/movies.reducer';
 
 import * as MovieActions from './store/movies.actions';
 import {MovieInterface} from "../../shared/interfaces/movie.interface";
@@ -19,7 +19,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
 
   // Movie Info
   showMovieInfo = false;
-  clickedMovie!: any;
+  selectedMovie!: MovieInterface | undefined;
   movies$!: Observable<MovieInterface[]>;
 
   constructor(
@@ -27,9 +27,15 @@ export class MoviesComponent implements OnInit, OnDestroy {
     private store: Store<MovieState>
   ) {
     this.movies$ = this.store.select(moviesSelector);
+    this.store.select(selectedMovieSelector)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res => {
+        this.selectedMovie = res;
+      })
   }
 
   ngOnInit(): void {
+    //Get Popular Movies
     this.store.dispatch(MovieActions.loadMovies());
   }
 
@@ -54,12 +60,12 @@ export class MoviesComponent implements OnInit, OnDestroy {
     }
   }
 
-  onMovieInfoClick(movie?: any) {
-    if (!this.showMovieInfo) {
-      this.showMovieInfo = true;
-      this.clickedMovie = movie;
+  onMovieInfoClick(movie?: MovieInterface) {
+    //Set selectedMovie to the movie which was clicked or to undefined
+    if(this.selectedMovie && this.selectedMovie === movie) {
+      this.store.dispatch(MovieActions.selectMovie({ movie: undefined}))
     } else {
-      this.showMovieInfo = false;
+      this.store.dispatch(MovieActions.selectMovie({ movie }));
     }
   }
 

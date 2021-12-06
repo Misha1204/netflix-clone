@@ -22,4 +22,14 @@ export class MoviesEffects {
       )
     )
   );
+
+  loadMoviesByGenre = createEffect(() =>
+    this.actions$.pipe(
+      ofType(MoviesActions.loadMoviesByGenre),
+      mergeMap(() =>
+        this.moviesService
+          .getMoviesByGenres()
+          .pipe(map((data) => MoviesActions.loadMoviesByGenreSuccess({ movies: data.movies, genre: data.genre})))
+      )
+    ))
 }

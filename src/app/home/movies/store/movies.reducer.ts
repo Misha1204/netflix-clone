@@ -47,5 +47,11 @@ export const moviesReducer = createReducer<MovieState>(
   initialState,
   on(MoviesActions.loadMoviesSuccess, (state, action): MovieState => {
     return MovieAdapter.setAll(action.movies, state);
+  }),
+  on(MoviesActions.selectMovie, (state, action): MovieState => {
+    return {
+      ...state,
+      selectedMovie: action.movie
+    }
   })
 );

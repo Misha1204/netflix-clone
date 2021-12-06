@@ -1,5 +1,7 @@
 <section *ngFor="let movie of movies$ | async">
-  <h1>{{movie.title}}</h1>
+  <h1>{{ movie.title }}</h1>
+
+  <button (click)="onMovieInfoClick(movie)">Button</button>
 </section>
 
 <!--<section class="section" *ngFor="let movieSection of allMoviesSections">-->
