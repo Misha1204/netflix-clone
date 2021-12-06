@@ -5,6 +5,7 @@ import {
   createSelector,
   on,
 } from '@ngrx/store';
+
 import { MovieInterface } from 'src/app/shared/interfaces/movie.interface';
 import * as MoviesActions from './movies.actions';
 
@@ -17,10 +18,12 @@ export const MovieAdapter: EntityAdapter<MovieInterface> =
 // State
 export interface MovieState extends EntityState<MovieInterface> {
   selectedMovie: MovieInterface | undefined;
+  showMovieInfo: boolean;
 }
 
 const initialState = MovieAdapter.getInitialState({
   selectedMovie: undefined,
+  showMovieInfo: false,
 });
 
 // Selectors

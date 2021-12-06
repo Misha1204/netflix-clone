@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subject } from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MoviesService } from './movies.service';
-import { MovieState } from './store/movies.reducer';
+import {moviesSelector, MovieState} from './store/movies.reducer';
 
 import * as MovieActions from './store/movies.actions';
+import {MovieInterface} from "../../shared/interfaces/movie.interface";
 
 @Component({
   selector: 'app-movies',
@@ -19,26 +20,16 @@ export class MoviesComponent implements OnInit, OnDestroy {
   // Movie Info
   showMovieInfo = false;
   clickedMovie!: any;
+  movies$!: Observable<MovieInterface[]>;
 
   constructor(
     private moviesService: MoviesService,
     private store: Store<MovieState>
   ) {
-    y;
+    this.movies$ = this.store.select(moviesSelector);
   }
 
   ngOnInit(): void {
-    // Get popular movies section on init
-
-    // this.moviesService
-    //   .getPopularMovies()
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((popularMovies) => {
-    //     this.allMoviesSections.push({
-    //       genre: 'Popular Movies',
-    //       movies: popularMovies,
-    //     });
-    //   });
     this.store.dispatch(MovieActions.loadMovies());
   }
 
@@ -64,9 +55,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
   }
 
   onMovieInfoClick(movie?: any) {
-    console.log(movie);
-
-    if (this.showMovieInfo === false) {
+    if (!this.showMovieInfo) {
       this.showMovieInfo = true;
       this.clickedMovie = movie;
     } else {
