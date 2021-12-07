@@ -10,18 +10,6 @@ import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MoviesService {
-  // ARRAY OF OBJECTS OF GENRES
-  objectsOfGenres: GenresInterface[] = [
-    { genre: 'Drama', id: 18, movies: [] },
-    { genre: 'Family', id: 10751, movies: [] },
-    { genre: 'Fantasy', id: 14, movies: [] },
-    { genre: 'History', id: 36, movies: [] },
-    { genre: 'Comedy', id: 35, movies: [] },
-    { genre: 'War', id: 10752, movies: [] },
-    { genre: 'Crime', id: 80, movies: [] },
-    { genre: 'Music', id: 10402, movies: [] },
-  ];
-
   // Index of Genre
   index = 0;
   endOfPage = new Subject<boolean>();

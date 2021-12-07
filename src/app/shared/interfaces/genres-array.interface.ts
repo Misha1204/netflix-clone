@@ -1,5 +1,7 @@
+import {MovieInterface} from "./movie.interface";
+
 export interface GenresInterface {
   genre: string;
-  id?: number;
-  movies: { poster_path: string }[];
+  id: number;
+  movies: MovieInterface[];
 }

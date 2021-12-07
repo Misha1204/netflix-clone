@@ -26,7 +26,7 @@ export class MoviesComponent implements OnInit, OnDestroy {
     private moviesService: MoviesService,
     private store: Store<MovieState>
   ) {
-    this.movies$ = this.store.select(moviesSelector);
+    // this.movies$ = this.store.select(moviesSelector);
     this.store.select(selectedMovieSelector)
       .pipe(takeUntil(this.destroy$))
       .subscribe(res => {
