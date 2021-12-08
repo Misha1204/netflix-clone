@@ -1,7 +1,7 @@
 import {MovieInterface} from "./movie.interface";
 
-export interface GenresInterface {
+export interface MoviesStoreInterface {
   genre: string;
-  id: number;
+  id?: number;
   movies: MovieInterface[];
 }

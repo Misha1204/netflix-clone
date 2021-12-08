@@ -6,18 +6,19 @@ import {
   on,
 } from '@ngrx/store';
 
-import { MovieInterface } from 'src/app/shared/interfaces/movie.interface';
+import { MovieInterface } from 'src/app/shared/interfaces/moviesInterfaces/movie.interface';
 import * as MoviesActions from './movies.actions';
-import {GenresInterface} from "../../../shared/interfaces/genres-array.interface";
+import {GenresInterface} from "../../../shared/interfaces/moviesInterfaces/genres.interface";
+import {MoviesStoreInterface} from "../../../shared/interfaces/moviesInterfaces/moviesStore.interface";
 
 // Movie Adapter
-export const MovieAdapter: EntityAdapter<GenresInterface> =
-  createEntityAdapter<GenresInterface>({
-    selectId: (genres: GenresInterface) => genres.id,
+export const MovieAdapter: EntityAdapter<MoviesStoreInterface> =
+  createEntityAdapter<MoviesStoreInterface>({
+    selectId: (genre: MoviesStoreInterface) => genre.genre
   });
 
 // State
-export interface MovieState extends EntityState<GenresInterface> {
+export interface MovieState extends EntityState<MoviesStoreInterface> {
   objectsOfGenres: GenresInterface[];
   selectedMovie: MovieInterface | undefined;
   showMovieInfo: boolean;
@@ -25,14 +26,15 @@ export interface MovieState extends EntityState<GenresInterface> {
 
 const initialState = MovieAdapter.getInitialState({
   objectsOfGenres: [
-    { genre: 'Drama', id: 18, movies: [] },
-    { genre: 'Family', id: 10751, movies: [] },
-    { genre: 'Fantasy', id: 14, movies: [] },
-    { genre: 'History', id: 36, movies: [] },
-    { genre: 'Comedy', id: 35, movies: [] },
-    { genre: 'War', id: 10752, movies: [] },
-    { genre: 'Crime', id: 80, movies: [] },
-    { genre: 'Music', id: 10402, movies: [] },
+    { genre: 'Popular Movies', id: 0 },
+    { genre: 'Drama', id: 18 },
+    { genre: 'Family', id: 10751 },
+    { genre: 'Fantasy', id: 14 },
+    { genre: 'History', id: 36 },
+    { genre: 'Comedy', id: 35 },
+    { genre: 'War', id: 10752 },
+    { genre: 'Crime', id: 80 },
+    { genre: 'Music', id: 10402 },
   ],
   selectedMovie: undefined,
   showMovieInfo: false,
@@ -54,16 +56,25 @@ export const selectedMovieSelector = createSelector(
   (state) => state.selectedMovie
 );
 
-export const genreSelector = createSelector(
-  getMoviesFeatureState,
-  (state) => state.objectsOfGenres
-)
+// export const selectEntity = (props: { id: number }) =>
+//   createSelector(selectEntities, (entities) => {
+//     return entities[props.id];
+//   });
+
+// export const selectEntity = (props: { id: any }) =>
+//   createSelector(
+//     getMoviesFeatureState,
+//     (entities: MovieState) => entities[props.id]
+//   );
+
+export const getEntityById = (id: string) => (state: MovieState) => state.entities[id];
+export const getUserEntityById = (id: string) => createSelector(getMoviesFeatureState, getEntityById(id));
 
 // Reducer
 export const moviesReducer = createReducer<MovieState>(
   initialState,
-  on(MoviesActions.loadMoviesSuccess, (state, action): MovieState => {
-    return MovieAdapter.setAll(action.movies, state);
+  on(MoviesActions.loadPopularMoviesSuccess, (state, action): MovieState => {
+    return MovieAdapter.addOne({ genre: action.genre, movies: action.movies }, state)
   }),
   on(MoviesActions.selectMovie, (state, action): MovieState => {
     return {

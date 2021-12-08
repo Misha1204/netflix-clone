@@ -1,13 +1,12 @@
-import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
-import { MovieInterface } from 'src/app/shared/interfaces/movie.interface';
+import { MovieInterface } from 'src/app/shared/interfaces/moviesInterfaces/movie.interface';
 
 // Load Popular Movies
-export const loadMovies = createAction('[Home Page] Load Movies');
+export const loadPopularMovies = createAction('[Home Page] Load Movies');
 
-export const loadMoviesSuccess = createAction(
+export const loadPopularMoviesSuccess = createAction(
   '[Home Page] Load Movies Success',
-  props<{ movies: MovieInterface[] }>()
+  props<{ genre: string, movies: MovieInterface[] }>()
 );
 
 // Get Movies By Genres
@@ -15,7 +14,7 @@ export const loadMoviesByGenre = createAction('[Home Page] Load Movies By Genre'
 
 export const loadMoviesByGenreSuccess = createAction(
   '[Home Page] Load Movies By Genre Success',
-  props<{ movies: MovieInterface[], genre: string }>()
+  props<{ genre: string, movies: MovieInterface[] }>()
 )
 
 // Select Movie

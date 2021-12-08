@@ -3,10 +3,10 @@ import { Store } from '@ngrx/store';
 import {Observable, Subject} from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { MoviesService } from './movies.service';
-import {moviesSelector, MovieState, selectedMovieSelector} from './store/movies.reducer';
+import { moviesSelector, MovieState, selectedMovieSelector} from './store/movies.reducer';
 
 import * as MovieActions from './store/movies.actions';
-import {MovieInterface} from "../../shared/interfaces/movie.interface";
+import { MovieInterface } from "../../shared/interfaces/moviesInterfaces/movie.interface";
 
 @Component({
   selector: 'app-movies',
@@ -15,7 +15,6 @@ import {MovieInterface} from "../../shared/interfaces/movie.interface";
 })
 export class MoviesComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<any>();
-  allMoviesSections: any = [];
 
   // Movie Info
   showMovieInfo = false;
@@ -36,28 +35,32 @@ export class MoviesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     //Get Popular Movies
-    this.store.dispatch(MovieActions.loadMovies());
+    this.store.dispatch(MovieActions.loadPopularMovies());
+
+    this.store.select(moviesSelector).subscribe(res => {
+      console.log(res)
+    })
   }
 
   fetchData() {
     // Increase index value
-    this.moviesService.index++;
+    // this.moviesService.index++;
 
     // In case if index value is less than number of objects in objectsOfGenres
-    if (this.moviesService.index < this.moviesService.objectsOfGenres.length) {
-      this.moviesService
-        .getMoviesByGenres()
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((res) => {
-          this.allMoviesSections.push({
-            genre: res.genre,
-            movies: res.movies,
-          });
-        });
-    } else {
-      // Display footer component
-      this.moviesService.endOfPage.next(true);
-    }
+    // if (this.moviesService.index < this.moviesService.objectsOfGenres.length) {
+    //   this.moviesService
+    //     .getMoviesByGenres()
+    //     .pipe(takeUntil(this.destroy$))
+    //     .subscribe((res) => {
+    //       this.allMoviesSections.push({
+    //         genre: res.genre,
+    //         movies: res.movies,
+    //       });
+    //     });
+    // } else {
+    //   // Display footer component
+    //   this.moviesService.endOfPage.next(true);
+    // }
   }
 
   onMovieInfoClick(movie?: MovieInterface) {
